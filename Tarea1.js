@@ -119,4 +119,4 @@ const mult=transaccion =>transaccion.monto * 0.05;
 console.log("retiros mayores a 5000");
 console.log(hechos.filter(retiro));
 console.log("multas");
-console.log(mult(hechos.filter(retiro)[0]));
+console.log(mult(hechos.map(retiro)[0]));

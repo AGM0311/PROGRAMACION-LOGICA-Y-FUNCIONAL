@@ -89,4 +89,4 @@ console.log(hechos.filter(reestruc));
 console.log("riesgo"),
 console.log(hechos.some(riesgo));
 console.log("certificación"),
-console.log(hechos.every(certificacion));
+console.log(hechos.every(certificacion)); 

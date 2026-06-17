@@ -64,7 +64,7 @@ console.log(hechos.filter(esmayor));
 console.log("usuarios especiales")
 console.log(hechos.filter(usuariosespeciales));
 console.log("usuarios que editan")
-console.log(hechos.filter(usuariosedit));*/
+console.log(hechos.filter(usuariosedit));
 
 const hechos=[
   { nombre: 'Luis', historialLimpio: true, ingresosEstables: true },
@@ -90,3 +90,33 @@ console.log("riesgo"),
 console.log(hechos.some(riesgo));
 console.log("certificación"),
 console.log(hechos.every(certificacion)); 
+
+//Freeze
+const nombres={nombre:"dany",rol:"admin"};
+nombres.rol="user";
+console.log(nombres);
+
+const nombres2=Object.freeze({nombre:"dany",rol:"admin"});
+nombres2.rol="user";
+console.log(nombres2);
+
+const nombres3={...nombres2,rol:"user"};
+console.log(nombres3);*/
+
+
+const hechos=[
+  { id: 1, tipo: 'deposito', monto: 10000 },
+  { id: 2, tipo: 'retiro', monto: 6000 },
+  { id: 3, tipo: 'retiro', monto: 1500 },
+  { id: 4, tipo: 'retiro', monto: 8000 }
+];
+
+//reglas
+const retiro=transaccion=>transaccion.tipo==="retiro" && transaccion.monto>5000;
+const mult=transaccion =>transaccion.monto * 0.05;
+
+//consultas
+console.log("retiros mayores a 5000");
+console.log(hechos.filter(retiro));
+console.log("multas");
+console.log(mult(hechos.filter(retiro)[0]));

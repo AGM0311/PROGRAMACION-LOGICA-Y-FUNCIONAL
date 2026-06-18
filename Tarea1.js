@@ -21,30 +21,30 @@ console.log(cond);*/
 
 
 
-/*const hechos=[
+const hechos=[
   { padre: 'Juan', hijo: 'Luis' }, 
   { padre: 'Juan', hijo: 'Pedro' }, 
   { padre: 'Abraham', hijo: 'Juan' }
 ];
 
-//const hermanos=hechos.filter(relacion=>relacion.padre==="Juan")
-//console.log(hermanos);
+const hermanos=hechos.filter( a=>a.padre==="Juan")
+console.log(hermanos.map(hermano=>hermano.hijo));
 
 
-function abuelo(a,c){
-  return a=="Abraham" && c=="Luis";
+function abuelo(a, c) {
+  return hechos.some(r1 => r1.padre === a && hechos.some(r2 => r2.padre === r1.hijo && r2.hijo === c));
 }
 
-console.log(abuelo("Abraham","Luis"));
+console.log(abuelo("Abraham","Pedro"));
 
 // ¿Es cierto que Abraham es padre de Juan?
-console.log(hechos.some(abr => abr.padre=="Abraham" && abr.hijo=="Juan"));
+//console.log(hechos.some(abr => abr.padre=="Abraham" && abr.hijo=="Juan"));
 
 // ¿Quién es el padre de Luis?
-console.log(hechos.filter(luis=>luis.hijo=="Luis").map(luis=>luis.padre));
+//console.log(hechos.filter(luis=>luis.hijo=="Luis").map(luis=>luis.padre));
 
 // ¿Quiénes son los hijos de Juan?
-console.log(hechos.filter(juan=>juan.padre=="Juan").map(juan=>juan.hijo));*/
+//console.log(hechos.filter(juan=>juan.padre=="Juan").map(juan=>juan.hijo));
 
 /*const hechos=[
   { nombre: 'Ana', edad: 25, rol: 'admin', activo: true },
@@ -101,7 +101,7 @@ nombres2.rol="user";
 console.log(nombres2);
 
 const nombres3={...nombres2,rol:"user"};
-console.log(nombres3);*/
+console.log(nombres3);
 
 
 const hechos=[
@@ -119,4 +119,4 @@ const mult=transaccion =>transaccion.monto * 0.05;
 console.log("retiros mayores a 5000");
 console.log(hechos.filter(retiro));
 console.log("multas");
-console.log(hechos.filter(retiro).map(mult).reduce((acum, multa) => acum + multa, 0));
+console.log(hechos.filter(retiro).map(mult).reduce((acum, multa) => acum + multa, 0));*/

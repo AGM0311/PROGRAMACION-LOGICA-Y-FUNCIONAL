@@ -1,4 +1,4 @@
-array=[{ ttulo: 'React Avanzado', categoria: 'Desarrollo', esGrats: false, tieneCertifcado: true },  
+/*array=[{ ttulo: 'React Avanzado', categoria: 'Desarrollo', esGrats: false, tieneCertifcado: true },  
 { ttulo: 'Introducción a UX/UI', categoria: 'Diseño', esGrats: true, tieneCertifcado: false },  
 { ttulo: 'Node.js y MongoDB', categoria: 'Desarrollo', esGrats: true, tieneCertifcado: true },  
 { ttulo: 'Figma para Principiantes', categoria: 'Diseño', esGrats: false, tieneCertifcado: false}
@@ -17,7 +17,7 @@ console.log(list);
 
 const cond=array.filter(curso=>curso.categoria==="Desarrollo" && curso.esGrats=== true || 
     curso.tieneCertifcado===true)
-console.log(cond);*/
+console.log(cond);
 
 
 
@@ -120,3 +120,47 @@ console.log("retiros mayores a 5000");
 console.log(hechos.filter(retiro));
 console.log("multas");
 console.log(hechos.filter(retiro).map(mult).reduce((acum, multa) => acum + multa, 0));*/
+
+
+const servicios=[
+  {
+    id:1,
+    nombre:'Autenticación',
+    zona:'us-east',
+    consultasPorMinuto:12000,
+    activo:true,
+    tecnologias:['Node','Redis']
+  },
+  {
+    id:2,
+    nombre:'Procesamiento Pagos',
+    zona:'us-west',
+    consultasPorMinuto:4500,
+    activo:true,
+    tecnologias:['Java', 'Spring']
+  },
+  {
+    id:3,
+    nombre:'Recomendaciones AI',
+    zona:'us-east',
+    consultasPorMinuto:25000,
+    activo:false,
+    tecnologias:['Python','TensorFlow']
+  },
+  {
+    id:4,
+    nombre:'Notificaciones',
+    zona:'eu-central',
+    consultasPorMinuto:8500,
+    activo:true,
+    tecnologias:['Node','RabbitMQ']
+  },
+  {
+    id:5,
+    nombre:'Reportes Históricos',
+    zona:'us-west',
+    consultasPorMinuto:500,
+    activo:false,
+    tecnologias:['Python','MongoDB']
+  }
+];

@@ -122,7 +122,6 @@ function* generalds(ides) {
         yield gene;
     }
 }
-
 const procesador = generalds("1 2 3 4 5");
 console.log('Resultado 1: ', procesador.next().value);
 console.log('Resultado 2: ', procesador.next().value);
@@ -180,3 +179,4 @@ function* preciosAlmacen(alma) {
 const procesadorPrecios = preciosAlmacen("100 200 300 400 500");
 console.log('Resultado 1: ', procesadorPrecios.next().value * 1.16);
 console.log('Resultado 2: ', procesadorPrecios.next().value * 1.16);
+const procesador 

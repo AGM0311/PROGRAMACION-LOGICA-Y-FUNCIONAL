@@ -35,7 +35,6 @@ const alertafraude=t=>esRetiro(t) && (esMontoSospechoso(t) || esZonaDeRiesgo(t))
 //Definir la funcion generadora
 function* generartrans(iterable,predicado){
     for(let dato of iterable){
-        //console.log(dato);
         if(predicado(dato)){
             yield dato;
         }

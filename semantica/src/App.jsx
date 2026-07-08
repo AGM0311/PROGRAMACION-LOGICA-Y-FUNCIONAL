@@ -1,122 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useMemo, useState } from "react";
+import { analizarCodigo } from "./lectura/lexico";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [codigo, setCodigo] = useState('funcion sumar(a, b) { return a + b; }');
+  
+  const tokens = useMemo(() => analizarCodigo(codigo), [codigo]);
+  
+  const coloresTokens = {
+    'palabra reservada': 'bg-orange-200 text-orange-800 border border-orange-400',
+    numero: 'bg-amber-200 text-amber-800 border border-amber-400',
+    operador: 'bg-green-200 text-green-800 border border-green-400',
+    identificador: 'bg-blue-200 text-blue-800 border border-blue-400',
+    delimitador: 'bg-purple-200 text-purple-800 border border-purple-400',
+    Desconocido: 'bg-gray-200 text-gray-800 border border-gray-400',
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="p-8 max-w-4xl mx-auto bg-white rounded-xl shadow-lg space-y-6 mt-10">
+      <header>
+        <h1 className="text-2xl font-bold text-gray-800">Analizador Léxico</h1>
+        <p className="text-sm text-gray-500">Programación</p>
+      </header>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-col space-y-2">
+          <label className="font-semibold text-gray-700">Código Fuente:</label>
+          <textarea
+            className="w-full h-48 p-3 font-mono border rounded-lg focus:ring-2 focus:ring-indigo-500 bg-gray-50"
+            value={codigo}
+            onChange={(e) => setCodigo(e.target.value)}
+            placeholder="Escribe tu código aquí..."
+          />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <div className="flex flex-col space-y-2">
+          <label className="font-semibold text-gray-700">Tokens Generados: ({tokens.length}):</label>
+          <div className="w-full h-48 p-4 border rounded-lg bg-gray-900 overflow-y-auto flex flex-wrap gap-2 content-start">
+            {tokens.length === 0 ? (
+              <span className="text-gray-500 italic">Escribe algo...</span>
+            ) : (
+              tokens.map((token) => (
+                <div
+                  key={token.id}
+                  className={`px-3 py-1 rounded-md text-xs font-mono border ${coloresTokens[token.tipo] || coloresTokens.Desconocido}`}
+                  title={`Tipo: ${token.tipo}`}
+                >
+                  <span className="font-bold">{token.valor}</span>
+                  <span className="block text-[10px] opacity-70 uppercase tracking-widest">{token.tipo}</span>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;
